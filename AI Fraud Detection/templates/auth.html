@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block title %}{{ "Login" if action == "login" else "Register" }} - CyberGuard{% endblock %}
+
+{% block content %}
+<section class="container" style="max-width: 500px; margin: 4rem auto;">
+    <div class="card">
+        <div class="card-header text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+            <h1 class="card-title">
+                {% if action == "login" %}
+                    Secure Login
+                {% else %}
+                    Create Account
+                {% endif %}
+            </h1>
+            <p style="color: var(--text-gray); margin: 0;">
+                {% if action == "login" %}
+                    Access your CyberGuard dashboard
+                {% else %}
+                    Join CyberGuard for advanced fraud protection
+                {% endif %}
+            </p>
+        </div>
+
+        <form method="POST" class="mt-3">
+            <div class="form-group">
+                <label for="username" class="form-label">
+                    <span style="color: var(--accent-blue);">👤</span> Username
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-control" 
+                    placeholder="Enter your username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">
+                    <span style="color: var(--accent-blue);">🔒</span> Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="form-control" 
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="{% if action == 'login' %}current-password{% else %}new-password{% endif %}"
+                >
+            </div>
+
+            {% if action == "register" %}
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    <span style="color: var(--accent-blue);">📧</span> Email (Optional)
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="form-control" 
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                >
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary w-100">
+                    {% if action == "login" %}
+                        🔐 Login to CyberGuard
+                    {% else %}
+                        🚀 Create Account
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <p style="color: var(--text-gray);">
+                {% if action == "login" %}
+                    Don't have an account? 
+                    <a href="{{ url_for('auth', action='register') }}" style="color: var(--accent-blue); text-decoration: none;">
+                        Register here
+                    </a>
+                {% else %}
+                    Already have an account? 
+                    <a href="{{ url_for('auth', action='login') }}" style="color: var(--accent-blue); text-decoration: none;">
+                        Login here
+                    </a>
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- Security Features -->
+        <div class="mt-4" style="border-top: 1px solid var(--border-gray); padding-top: 1.5rem;">
+            <h5 style="color: var(--accent-blue); margin-bottom: 1rem; text-align: center;">🔒 Security Features</h5>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="text-center">
+                    <div style="color: var(--success-green); font-size: 1.5rem;">✓</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0.5rem 0 0 0;">Encrypted Passwords</p>
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--success-green); font-size: 1.5rem;">✓</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0.5rem 0 0 0;">Secure Sessions</p>
+                </div>
+                <div class="text-center">
+                    <div style="color: var(--success-green); font-size: 1.5rem;">✓</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0.5rem 0 0 0;">Privacy Protected</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Security Information -->
+    <div class="card mt-3">
+        <div class="text-center">
+            <h5 style="color: var(--accent-blue); margin-bottom: 1rem;">🛡️ Why Choose CyberGuard?</h5>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                <div>
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤖</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">AI-Powered Detection</p>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">Real-time Analysis</p>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">Detailed Reports</p>
+                </div>
+                <div>
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">Threat Intelligence</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="card mt-3">
+        <div class="text-center">
+            <h5 style="color: var(--accent-blue); margin-bottom: 1rem;">🔐 Your Security is Our Priority</h5>
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="color: var(--success-green); font-size: 1.2rem;">
+                    <div style="font-size: 1.5rem;">🛡️</div>
+                    <small style="color: var(--text-gray);">Bank-Level Security</small>
+                </div>
+                <div style="color: var(--success-green); font-size: 1.2rem;">
+                    <div style="font-size: 1.5rem;">🔒</div>
+                    <small style="color: var(--text-gray);">End-to-End Encryption</small>
+                </div>
+                <div style="color: var(--success-green); font-size: 1.2rem;">
+                    <div style="font-size: 1.5rem;">⚡</div>
+                    <small style="color: var(--text-gray);">Instant Protection</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add password strength indicator for registration
+    const passwordInput = document.getElementById('password');
+    const form = document.querySelector('form');
+    
+    if (passwordInput && '{{ action }}' === 'register') {
+        const strengthIndicator = document.createElement('div');
+        strengthIndicator.style.marginTop = '0.5rem';
+        strengthIndicator.style.fontSize = '0.9rem';
+        passwordInput.parentNode.appendChild(strengthIndicator);
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            let message = '';
+            let color = '';
+            
+            if (password.length >= 8) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            switch(strength) {
+                case 0:
+                case 1:
+                    message = 'Very Weak';
+                    color = 'var(--danger-red)';
+                    break;
+                case 2:
+                    message = 'Weak';
+                    color = 'var(--warning-orange)';
+                    break;
+                case 3:
+                    message = 'Fair';
+                    color = 'var(--warning-orange)';
+                    break;
+                case 4:
+                    message = 'Good';
+                    color = 'var(--success-green)';
+                    break;
+                case 5:
+                    message = 'Strong';
+                    color = 'var(--success-green)';
+                    break;
+            }
+            
+            strengthIndicator.innerHTML = `<span style="color: ${color};">Password Strength: ${message}</span>`;
+        });
+    }
+    
+    // Add form validation
+    form.addEventListener('submit', function(e) {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        
+        if (username.length < 3) {
+            e.preventDefault();
+            alert('Username must be at least 3 characters long.');
+            return;
+        }
+        
+        if (password.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters long.');
+            return;
+        }
+        
+        // Add loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<span class="spinner"></span> Processing...';
+        submitBtn.disabled = true;
+    });
+});
+</script>
+{% endblock %}

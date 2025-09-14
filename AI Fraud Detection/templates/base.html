@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CyberGuard - AI Fraud Detection{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ url_for('home') }}" class="navbar-brand">
+                    🛡️ CyberGuard
+                </a>
+                
+                <ul class="navbar-nav">
+                    {% if session.username %}
+                        <li><a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+                        <li><a href="{{ url_for('detect_scam') }}" class="nav-link {% if request.endpoint == 'detect_scam' %}active{% endif %}">Detect Scam</a></li>
+                        <li><a href="{{ url_for('report_scam') }}" class="nav-link {% if request.endpoint == 'report_scam' %}active{% endif %}">Report</a></li>
+                        <li><a href="{{ url_for('education') }}" class="nav-link {% if request.endpoint == 'education' %}active{% endif %}">Education</a></li>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <span class="text-gray me-2">Welcome, {{ session.username }}</span>
+                                <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth', action='login') }}" class="nav-link">Login</a></li>
+                        <li><a href="{{ url_for('auth', action='register') }}" class="btn btn-primary">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-2">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} fade-in">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-5" style="background: rgba(10, 10, 10, 0.95); border-top: 1px solid var(--border-gray); padding: 2rem 0; margin-top: 4rem;">
+        <div class="container text-center">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">🛡️ CyberGuard</h4>
+                    <p style="color: var(--text-gray); margin: 0;">Advanced AI-Powered Fraud Detection</p>
+                </div>
+                <div>
+                    <p style="color: var(--text-gray); margin: 0;">
+                        © 2024 CyberGuard. Protecting digital communications worldwide.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for enhanced interactivity -->
+    <script>
+        // Add loading states to forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function() {
+                    const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<span class="spinner"></span> Processing...';
+                    }
+                });
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card, .stat-card, .feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.card, .stat-card, .feature-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Highlight keywords in detection results
+        function highlightKeywords(text, keywords) {
+            if (!keywords || keywords.length === 0) return text;
+            
+            let highlightedText = text;
+            keywords.forEach(keyword => {
+                const regex = new RegExp(`(${keyword})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<span class="keywords-highlight">$1</span>');
+            });
+            return highlightedText;
+        }
+
+        // Update confidence bar animation
+        function animateConfidenceBar(percentage) {
+            const bars = document.querySelectorAll('.confidence-fill');
+            bars.forEach(bar => {
+                bar.style.width = percentage + '%';
+            });
+        }
+
+        // Initialize confidence bars if they exist
+        document.addEventListener('DOMContentLoaded', function() {
+            const confidenceBars = document.querySelectorAll('.confidence-fill');
+            confidenceBars.forEach(bar => {
+                const percentage = bar.getAttribute('data-percentage');
+                if (percentage) {
+                    setTimeout(() => {
+                        bar.style.width = percentage + '%';
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

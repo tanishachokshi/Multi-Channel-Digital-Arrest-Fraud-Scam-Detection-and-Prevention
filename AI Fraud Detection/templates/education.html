@@ -1,0 +1,549 @@
+{% extends "base.html" %}
+
+{% block title %}Security Education - CyberGuard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="card mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 style="color: var(--accent-blue); margin-bottom: 0.5rem;">
+                    📚 Cybersecurity Education Center
+                </h1>
+                <p style="color: var(--text-gray); margin: 0;">
+                    Learn about common scam tactics, phishing techniques, and how to protect yourself from digital threats.
+                </p>
+            </div>
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-blue);">🎓</div>
+                <small style="color: var(--text-gray);">Knowledge is Power</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Learning Modules -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🎯 Quick Learning Modules</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger-red); border-radius: 12px; padding: 1.5rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎣</div>
+                <h4 style="color: var(--danger-red); margin-bottom: 1rem;">Phishing Attacks</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    Learn to identify and avoid phishing emails, fake websites, and social engineering attacks.
+                </p>
+                <button class="btn btn-danger" onclick="showModule('phishing')">Learn More</button>
+            </div>
+            
+            <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid var(--warning-orange); border-radius: 12px; padding: 1.5rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
+                <h4 style="color: var(--warning-orange); margin-bottom: 1rem;">Financial Scams</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    Understand investment fraud, fake lottery winnings, and money transfer scams.
+                </p>
+                <button class="btn" style="background: var(--warning-orange); color: white;" onclick="showModule('financial')">Learn More</button>
+            </div>
+            
+            <div style="background: rgba(0, 212, 255, 0.1); border: 1px solid var(--accent-blue); border-radius: 12px; padding: 1.5rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🛠️</div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">Tech Support Scams</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    Recognize fake tech support calls and remote access scams.
+                </p>
+                <button class="btn btn-primary" onclick="showModule('tech')">Learn More</button>
+            </div>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success-green); border-radius: 12px; padding: 1.5rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+                <h4 style="color: var(--success-green); margin-bottom: 1rem;">Identity Theft</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    Protect your personal information and recognize identity theft attempts.
+                </p>
+                <button class="btn btn-success" onclick="showModule('identity')">Learn More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Red Flags Guide -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🚨 Common Red Flags</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">⚡ Urgency Tactics</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>"Act immediately"</li>
+                    <li>"Limited time offer"</li>
+                    <li>"Expires today"</li>
+                    <li>"Urgent action required"</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">💰 Money Requests</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Wire transfers</li>
+                    <li>Gift cards</li>
+                    <li>Cryptocurrency</li>
+                    <li>Prepaid cards</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🔍 Personal Info</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Social Security Number</li>
+                    <li>Bank account details</li>
+                    <li>Passwords</li>
+                    <li>Credit card info</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🏛️ Authority Claims</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>IRS threats</li>
+                    <li>Court summons</li>
+                    <li>Police warnings</li>
+                    <li>Government agencies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Protection Strategies -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🛡️ Protection Strategies</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(0, 212, 255, 0.1); border-left: 4px solid var(--accent-blue); padding: 1.5rem; border-radius: 8px;">
+                <h5 style="color: var(--accent-blue); margin-bottom: 1rem;">🔍 Verification</h5>
+                <ul style="color: var(--text-gray); margin: 0; padding-left: 1rem;">
+                    <li>Always verify sender identity</li>
+                    <li>Use official contact methods</li>
+                    <li>Check website URLs carefully</li>
+                    <li>Look for HTTPS encryption</li>
+                    <li>Verify phone numbers independently</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--success-green); padding: 1.5rem; border-radius: 8px;">
+                <h5 style="color: var(--success-green); margin-bottom: 1rem;">🔒 Security</h5>
+                <ul style="color: var(--text-gray); margin: 0; padding-left: 1rem;">
+                    <li>Enable two-factor authentication</li>
+                    <li>Use strong, unique passwords</li>
+                    <li>Keep software updated</li>
+                    <li>Use antivirus software</li>
+                    <li>Regular security scans</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--warning-orange); padding: 1.5rem; border-radius: 8px;">
+                <h5 style="color: var(--warning-orange); margin-bottom: 1rem;">🧠 Awareness</h5>
+                <ul style="color: var(--text-gray); margin: 0; padding-left: 1rem;">
+                    <li>Stay informed about new threats</li>
+                    <li>Trust your instincts</li>
+                    <li>Take time to think</li>
+                    <li>Ask questions</li>
+                    <li>Educate family members</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scam Statistics -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">📊 Scam Statistics & Trends</h3>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">91%</div>
+                <div class="stat-label">of cyber attacks start with phishing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$6T</div>
+                <div class="stat-label">estimated global cybercrime cost by 2024</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">43%</div>
+                <div class="stat-label">of small businesses targeted by cyber attacks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">85%</div>
+                <div class="stat-label">of cyber attacks target individuals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Quiz -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🧠 Test Your Knowledge</h3>
+        </div>
+        <div id="quiz-container">
+            <div id="quiz-question" style="padding: 1rem;">
+                <h5 style="color: var(--accent-blue); margin-bottom: 1rem;">Question 1 of 5</h5>
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    You receive an email claiming to be from your bank asking you to click a link to verify your account. What should you do?
+                </p>
+                <div style="display: grid; gap: 0.5rem;">
+                    <button class="btn btn-secondary quiz-option" data-answer="correct">Contact your bank directly using their official website or phone number</button>
+                    <button class="btn btn-secondary quiz-option" data-answer="wrong">Click the link to verify your account</button>
+                    <button class="btn btn-secondary quiz-option" data-answer="wrong">Reply to the email with your account information</button>
+                    <button class="btn btn-secondary quiz-option" data-answer="wrong">Forward the email to friends to warn them</button>
+                </div>
+            </div>
+            <div id="quiz-result" style="display: none; padding: 1rem; text-align: center;">
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">Quiz Complete!</h4>
+                <p style="color: var(--text-gray);">You scored <span id="quiz-score">0</span> out of 5 correct answers.</p>
+                <button class="btn btn-primary" onclick="restartQuiz()">Take Quiz Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources & Links -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🔗 Additional Resources</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">🏛️ Government Resources</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>FBI Internet Crime Complaint Center</li>
+                    <li>FTC Consumer Information</li>
+                    <li>CISA Cybersecurity Tips</li>
+                    <li>IdentityTheft.gov</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">📚 Educational Sites</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Stay Safe Online</li>
+                    <li>Cybersecurity Awareness</li>
+                    <li>Stop.Think.Connect</li>
+                    <li>National Cyber Security Alliance</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">🛠️ Tools & Software</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Password Managers</li>
+                    <li>Antivirus Software</li>
+                    <li>VPN Services</li>
+                    <li>Email Security Tools</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Module Details Modal -->
+<div id="moduleModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; padding: 2rem;">
+    <div style="background: var(--secondary-black); border-radius: 12px; padding: 2rem; max-width: 800px; margin: 0 auto; position: relative; max-height: 80vh; overflow-y: auto;">
+        <button onclick="closeModule()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-gray); font-size: 1.5rem; cursor: pointer;">×</button>
+        <div id="moduleContent"></div>
+    </div>
+</div>
+
+<script>
+let currentQuizQuestion = 0;
+let quizScore = 0;
+const quizQuestions = [
+    {
+        question: "You receive an email claiming to be from your bank asking you to click a link to verify your account. What should you do?",
+        options: [
+            "Contact your bank directly using their official website or phone number",
+            "Click the link to verify your account",
+            "Reply to the email with your account information",
+            "Forward the email to friends to warn them"
+        ],
+        correct: 0
+    },
+    {
+        question: "A caller claims to be from Microsoft tech support and says your computer is infected. What should you do?",
+        options: [
+            "Allow them remote access to fix the problem",
+            "Hang up and contact Microsoft directly",
+            "Provide your credit card information for the service",
+            "Download the software they recommend"
+        ],
+        correct: 1
+    },
+    {
+        question: "You receive a text message saying you've won a lottery you never entered. What should you do?",
+        options: [
+            "Reply with your personal information to claim the prize",
+            "Click the link to claim your winnings",
+            "Delete the message and ignore it",
+            "Forward it to friends to share the good news"
+        ],
+        correct: 2
+    },
+    {
+        question: "An email asks you to verify your account by providing your Social Security Number. What should you do?",
+        options: [
+            "Provide your SSN to verify your identity",
+            "Reply with your full personal information",
+            "Delete the email and contact the company directly",
+            "Forward the email to your family"
+        ],
+        correct: 2
+    },
+    {
+        question: "A website asks you to download software to view content. What should you do?",
+        options: [
+            "Download and install the software immediately",
+            "Check if the website is legitimate first",
+            "Provide your email address to download",
+            "Disable your antivirus to allow the download"
+        ],
+        correct: 1
+    }
+];
+
+const moduleContent = {
+    phishing: {
+        title: "🎣 Phishing Attacks",
+        content: `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">What is Phishing?</h3>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                Phishing is a cyber attack that uses disguised email, text messages, or websites to trick you into revealing personal information, passwords, or financial details.
+            </p>
+            
+            <h4 style="color: var(--danger-red); margin-bottom: 1rem;">Common Phishing Tactics:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Fake emails from banks, government agencies, or popular companies</li>
+                <li>Urgent requests for immediate action</li>
+                <li>Suspicious links that lead to fake websites</li>
+                <li>Attachments that contain malware</li>
+                <li>Requests for personal or financial information</li>
+            </ul>
+            
+            <h4 style="color: var(--success-green); margin-bottom: 1rem;">How to Protect Yourself:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Never click links in suspicious emails</li>
+                <li>Verify sender identity through official channels</li>
+                <li>Check for spelling and grammar errors</li>
+                <li>Look for HTTPS in website URLs</li>
+                <li>Use two-factor authentication when available</li>
+            </ul>
+        `
+    },
+    financial: {
+        title: "💰 Financial Scams",
+        content: `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Types of Financial Scams</h3>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                Financial scams target your money through various deceptive tactics, including fake investments, lottery scams, and romance fraud.
+            </p>
+            
+            <h4 style="color: var(--danger-red); margin-bottom: 1rem;">Common Financial Scams:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Fake investment opportunities with guaranteed returns</li>
+                <li>Lottery or prize notifications for contests you never entered</li>
+                <li>Romance scams asking for money</li>
+                <li>Fake charity requests</li>
+                <li>Cryptocurrency investment fraud</li>
+            </ul>
+            
+            <h4 style="color: var(--success-green); margin-bottom: 1rem;">Red Flags:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Promises of easy money or guaranteed profits</li>
+                <li>Requests for wire transfers or gift cards</li>
+                <li>Pressure to act quickly</li>
+                <li>Unregistered investment opportunities</li>
+                <li>Requests for upfront fees</li>
+            </ul>
+        `
+    },
+    tech: {
+        title: "🛠️ Tech Support Scams",
+        content: `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Tech Support Scams</h3>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                Scammers impersonate tech support from legitimate companies to gain access to your computer and steal personal information or money.
+            </p>
+            
+            <h4 style="color: var(--danger-red); margin-bottom: 1rem;">How Tech Support Scams Work:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Cold calls claiming your computer is infected</li>
+                <li>Pop-up warnings on websites</li>
+                <li>Fake error messages</li>
+                <li>Requests for remote access to your computer</li>
+                <li>Demands for payment for "repairs"</li>
+            </ul>
+            
+            <h4 style="color: var(--success-green); margin-bottom: 1rem;">Protection Tips:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Never give remote access to unsolicited callers</li>
+                <li>Hang up and call the company directly</li>
+                <li>Don't pay for unsolicited tech support</li>
+                <li>Keep your software updated</li>
+                <li>Use reputable antivirus software</li>
+            </ul>
+        `
+    },
+    identity: {
+        title: "🔐 Identity Theft Protection",
+        content: `
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Identity Theft</h3>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                Identity theft occurs when someone uses your personal information without permission to commit fraud or other crimes.
+            </p>
+            
+            <h4 style="color: var(--danger-red); margin-bottom: 1rem;">How Identity Theft Happens:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Data breaches at companies</li>
+                <li>Phishing emails and fake websites</li>
+                <li>Stolen mail or documents</li>
+                <li>Social media oversharing</li>
+                <li>Unsecured Wi-Fi networks</li>
+            </ul>
+            
+            <h4 style="color: var(--success-green); margin-bottom: 1rem;">Protection Measures:</h4>
+            <ul style="color: var(--text-gray); margin-bottom: 1rem; padding-left: 1.5rem;">
+                <li>Monitor your credit reports regularly</li>
+                <li>Use strong, unique passwords</li>
+                <li>Enable two-factor authentication</li>
+                <li>Shred sensitive documents</li>
+                <li>Be cautious with personal information online</li>
+            </ul>
+        `
+    }
+};
+
+function showModule(moduleType) {
+    const modal = document.getElementById('moduleModal');
+    const content = document.getElementById('moduleContent');
+    const module = moduleContent[moduleType];
+    
+    content.innerHTML = `
+        <h2 style="color: var(--accent-blue); margin-bottom: 1.5rem;">${module.title}</h2>
+        ${module.content}
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary" onclick="closeModule()">Close</button>
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+}
+
+function closeModule() {
+    document.getElementById('moduleModal').style.display = 'none';
+}
+
+// Quiz functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const isCorrect = this.getAttribute('data-answer') === 'correct';
+            
+            if (isCorrect) {
+                this.style.background = 'var(--success-green)';
+                quizScore++;
+            } else {
+                this.style.background = 'var(--danger-red)';
+            }
+            
+            // Disable all options
+            quizOptions.forEach(opt => opt.disabled = true);
+            
+            // Show correct answers
+            quizOptions.forEach(opt => {
+                if (opt.getAttribute('data-answer') === 'correct') {
+                    opt.style.background = 'var(--success-green)';
+                }
+            });
+            
+            setTimeout(() => {
+                currentQuizQuestion++;
+                if (currentQuizQuestion < quizQuestions.length) {
+                    loadQuizQuestion();
+                } else {
+                    showQuizResult();
+                }
+            }, 2000);
+        });
+    });
+});
+
+function loadQuizQuestion() {
+    const question = quizQuestions[currentQuizQuestion];
+    const container = document.getElementById('quiz-question');
+    
+    container.innerHTML = `
+        <h5 style="color: var(--accent-blue); margin-bottom: 1rem;">Question ${currentQuizQuestion + 1} of ${quizQuestions.length}</h5>
+        <p style="color: var(--text-gray); margin-bottom: 1.5rem;">${question.question}</p>
+        <div style="display: grid; gap: 0.5rem;">
+            ${question.options.map((option, index) => `
+                <button class="btn btn-secondary quiz-option" data-answer="${index === question.correct ? 'correct' : 'wrong'}">${option}</button>
+            `).join('')}
+        </div>
+    `;
+    
+    // Re-add event listeners
+    const newOptions = container.querySelectorAll('.quiz-option');
+    newOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const isCorrect = this.getAttribute('data-answer') === 'correct';
+            
+            if (isCorrect) {
+                this.style.background = 'var(--success-green)';
+                quizScore++;
+            } else {
+                this.style.background = 'var(--danger-red)';
+            }
+            
+            // Disable all options
+            newOptions.forEach(opt => opt.disabled = true);
+            
+            // Show correct answers
+            newOptions.forEach(opt => {
+                if (opt.getAttribute('data-answer') === 'correct') {
+                    opt.style.background = 'var(--success-green)';
+                }
+            });
+            
+            setTimeout(() => {
+                currentQuizQuestion++;
+                if (currentQuizQuestion < quizQuestions.length) {
+                    loadQuizQuestion();
+                } else {
+                    showQuizResult();
+                }
+            }, 2000);
+        });
+    });
+}
+
+function showQuizResult() {
+    document.getElementById('quiz-question').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    document.getElementById('quiz-score').textContent = quizScore;
+}
+
+function restartQuiz() {
+    currentQuizQuestion = 0;
+    quizScore = 0;
+    document.getElementById('quiz-question').style.display = 'block';
+    document.getElementById('quiz-result').style.display = 'none';
+    loadQuizQuestion();
+}
+
+// Close modal when clicking outside
+document.getElementById('moduleModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModule();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}CyberGuard - AI-Powered Fraud Detection & Prevention{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">CyberGuard</h1>
+            <p class="hero-subtitle">
+                Advanced AI-powered multi-channel fraud detection and prevention system. 
+                Protect yourself from scams, phishing attempts, and digital threats with cutting-edge machine learning technology.
+            </p>
+            <div class="mt-3">
+                {% if session.username %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary me-2">Go to Dashboard</a>
+                    <a href="{{ url_for('detect_scam') }}" class="btn btn-secondary">Detect Scam Now</a>
+                {% else %}
+                    <a href="{{ url_for('auth', action='register') }}" class="btn btn-primary me-2">Get Started</a>
+                    <a href="{{ url_for('auth', action='login') }}" class="btn btn-secondary">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container">
+    <div class="text-center mb-3">
+        <h2 style="color: var(--accent-blue); font-size: 2.5rem; margin-bottom: 1rem;">Advanced Protection Features</h2>
+        <p style="color: var(--text-gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+            Our cutting-edge AI technology analyzes communications across multiple channels to identify and prevent fraud attempts.
+        </p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title">AI-Powered Detection</h3>
+            <p class="feature-description">
+                Advanced machine learning algorithms analyze text patterns, keywords, and behavioral indicators to identify potential scams with high accuracy.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3 class="feature-title">Real-time Analysis</h3>
+            <p class="feature-description">
+                Instant analysis of suspicious communications with detailed explanations of detected threats and highlighted risk indicators.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Multi-Channel Support</h3>
+            <p class="feature-description">
+                Comprehensive protection across email, SMS, social media, and other digital communication channels.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3 class="feature-title">Educational Resources</h3>
+            <p class="feature-description">
+                Learn about common scam tactics, phishing techniques, and how to protect yourself from digital threats.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3 class="feature-title">Manual Reporting</h3>
+            <p class="feature-description">
+                Report suspicious communications to help improve our detection algorithms and protect the community.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3 class="feature-title">Analytics Dashboard</h3>
+            <p class="feature-description">
+                Track detection statistics, view threat trends, and monitor your security status with detailed analytics.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title text-center">How CyberGuard Works</h2>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">1. Input Analysis</h4>
+                <p style="color: var(--text-gray);">
+                    Paste suspicious text, email, or message content into our detection engine for instant analysis.
+                </p>
+            </div>
+            <div class="text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">2. AI Processing</h4>
+                <p style="color: var(--text-gray);">
+                    Our advanced algorithms analyze patterns, keywords, and behavioral indicators to assess threat levels.
+                </p>
+            </div>
+            <div class="text-center">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 1rem;">3. Protection</h4>
+                <p style="color: var(--text-gray);">
+                    Receive detailed threat analysis with highlighted indicators and actionable security recommendations.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Threat Statistics Section -->
+<section class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title text-center">Digital Threat Landscape</h2>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">85%</div>
+                <div class="stat-label">of cyber attacks target individuals</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$6T</div>
+                <div class="stat-label">estimated global cybercrime cost by 2024</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">91%</div>
+                <div class="stat-label">of attacks start with phishing emails</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">43%</div>
+                <div class="stat-label">of small businesses targeted by cyber attacks</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="container mt-5 mb-5">
+    <div class="card text-center" style="background: var(--gradient-accent); color: white;">
+        <div style="padding: 3rem;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Protect Yourself?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                Join thousands of users who trust CyberGuard to protect their digital communications.
+            </p>
+            {% if not session.username %}
+                <a href="{{ url_for('auth', action='register') }}" class="btn" style="background: white; color: var(--primary-black); font-weight: bold; padding: 1rem 2rem; font-size: 1.1rem;">
+                    Start Your Free Protection
+                </a>
+            {% else %}
+                <a href="{{ url_for('detect_scam') }}" class="btn" style="background: white; color: var(--primary-black); font-weight: bold; padding: 1rem 2rem; font-size: 1.1rem;">
+                    Analyze Your First Message
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Security Features Highlight -->
+<section class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title text-center">Advanced Security Features</h2>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Pattern Recognition</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Detects common scam patterns and phishing techniques</p>
+            </div>
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Keyword Analysis</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Identifies suspicious keywords and phrases</p>
+            </div>
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Risk Assessment</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Provides detailed risk levels and confidence scores</p>
+            </div>
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Deepfake Detection</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Advanced algorithms to detect AI-generated content</p>
+            </div>
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Real-time Updates</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Continuously updated threat intelligence</p>
+            </div>
+            <div class="text-center">
+                <div style="color: var(--success-green); font-size: 2rem; margin-bottom: 0.5rem;">✓</div>
+                <h5 style="color: var(--accent-blue);">Privacy Protected</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Your data is encrypted and never stored permanently</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,331 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CyberGuard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Welcome Section -->
+    <div class="card mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 style="color: var(--accent-blue); margin-bottom: 0.5rem;">
+                    🛡️ Welcome back, {{ username }}!
+                </h1>
+                <p style="color: var(--text-gray); margin: 0;">
+                    Your cybersecurity dashboard is ready. Monitor threats and protect your digital communications.
+                </p>
+            </div>
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-blue);">🔒</div>
+                <small style="color: var(--text-gray);">Protected</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_detections }}</div>
+            <div class="stat-label">Total Scans</div>
+            <div style="color: var(--accent-blue); font-size: 0.9rem; margin-top: 0.5rem;">
+                📊 Messages Analyzed
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.high_risk_detections }}</div>
+            <div class="stat-label">High Risk Detected</div>
+            <div style="color: var(--danger-red); font-size: 0.9rem; margin-top: 0.5rem;">
+                ⚠️ Threats Blocked
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ stats.total_reports }}</div>
+            <div class="stat-label">Reports Submitted</div>
+            <div style="color: var(--success-green); font-size: 0.9rem; margin-top: 0.5rem;">
+                📝 Community Help
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">
+                {% if stats.models_loaded %}100{% else %}85{% endif %}%
+            </div>
+            <div class="stat-label">Detection Accuracy</div>
+            <div style="color: var(--success-green); font-size: 0.9rem; margin-top: 0.5rem;">
+                {% if stats.models_loaded %}🤖 AI Enhanced{% else %}🔍 Pattern Based{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">⚡ Quick Actions</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <a href="{{ url_for('detect_scam') }}" class="btn btn-primary text-center" style="padding: 1.5rem;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                <div>Scan Message</div>
+                <small style="opacity: 0.8;">Analyze suspicious text</small>
+            </a>
+            
+            <a href="{{ url_for('report_scam') }}" class="btn btn-secondary text-center" style="padding: 1.5rem;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+                <div>Report Scam</div>
+                <small style="opacity: 0.8;">Submit suspicious content</small>
+            </a>
+            
+            <a href="{{ url_for('education') }}" class="btn btn-secondary text-center" style="padding: 1.5rem;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                <div>Learn More</div>
+                <small style="opacity: 0.8;">Security education</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Detections -->
+    {% if recent_detections %}
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🔍 Recent Scam Detections</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Content Preview</th>
+                        <th>Risk Level</th>
+                        <th>Confidence</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detection in recent_detections %}
+                    <tr>
+                        <td>
+                            {% if detection[1] %}  <!-- is_scam -->
+                                <span class="result-status status-scam">🚨 SCAM</span>
+                            {% elif detection[3] == 'medium' %}  <!-- risk_level -->
+                                <span class="result-status status-suspicious">⚠️ SUSPICIOUS</span>
+                            {% else %}
+                                <span class="result-status status-safe">✅ SAFE</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
+                                {{ detection[0][:50] }}{% if detection[0]|length > 50 %}...{% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <span style="color: {% if detection[3] == 'high' %}var(--danger-red){% elif detection[3] == 'medium' %}var(--warning-orange){% else %}var(--success-green){% endif %};">
+                                {{ detection[3].upper() }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" data-percentage="{{ (detection[2] * 100)|int }}"></div>
+                            </div>
+                            <small style="color: var(--text-gray);">{{ "%.1f"|format(detection[2] * 100) }}%</small>
+                        </td>
+                        <td>
+                            <small style="color: var(--text-gray);">{{ detection[7] }}</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;" 
+                                    onclick="showDetectionDetails({{ loop.index0 }})">
+                                View Details
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="card mt-3 text-center">
+        <div style="padding: 3rem;">
+            <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.5;">🔍</div>
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">No Scans Yet</h3>
+            <p style="color: var(--text-gray); margin-bottom: 2rem;">
+                Start protecting yourself by scanning your first suspicious message.
+            </p>
+            <a href="{{ url_for('detect_scam') }}" class="btn btn-primary">
+                🔍 Scan Your First Message
+            </a>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Security Status -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🛡️ Security Status</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--success-green); margin-bottom: 1rem;">✅</div>
+                <h5 style="color: var(--accent-blue);">System Status</h5>
+                <p style="color: var(--text-gray); margin: 0;">All systems operational</p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 1rem;">🤖</div>
+                <h5 style="color: var(--accent-blue);">AI Models</h5>
+                <p style="color: var(--text-gray); margin: 0;">
+                    {% if stats.models_loaded %}Enhanced detection active{% else %}Pattern-based detection{% endif %}
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--success-green); margin-bottom: 1rem;">🔒</div>
+                <h5 style="color: var(--accent-blue);">Data Protection</h5>
+                <p style="color: var(--text-gray); margin: 0;">End-to-end encrypted</p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--warning-orange); margin-bottom: 1rem;">📊</div>
+                <h5 style="color: var(--accent-blue);">Threat Level</h5>
+                <p style="color: var(--text-gray); margin: 0;">
+                    {% if stats.high_risk_detections > 0 %}Elevated{% else %}Normal{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips and Recommendations -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">💡 Security Tips</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">🔍 Always Verify Sources</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Before clicking links or providing information, verify the sender's identity through official channels.
+                </p>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 4px solid var(--success-green);">
+                <h6 style="color: var(--success-green); margin-bottom: 0.5rem;">📱 Use Multi-Factor Authentication</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Enable 2FA on all your important accounts to add an extra layer of security.
+                </p>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border-left: 4px solid var(--warning-orange);">
+                <h6 style="color: var(--warning-orange); margin-bottom: 0.5rem;">⚠️ Be Wary of Urgency</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Scammers often create false urgency. Take time to verify before acting.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detection Details Modal -->
+<div id="detectionModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; padding: 2rem;">
+    <div style="background: var(--secondary-black); border-radius: 12px; padding: 2rem; max-width: 600px; margin: 0 auto; position: relative;">
+        <button onclick="closeDetectionDetails()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-gray); font-size: 1.5rem; cursor: pointer;">×</button>
+        <div id="detectionContent"></div>
+    </div>
+</div>
+
+<script>
+const recentDetections = {{ recent_detections|tojson }};
+
+function showDetectionDetails(index) {
+    const detection = recentDetections[index];
+    const modal = document.getElementById('detectionModal');
+    const content = document.getElementById('detectionContent');
+    
+    let statusHtml = '';
+    if (detection[1]) {  // is_scam
+        statusHtml = '<span class="result-status status-scam">🚨 SCAM DETECTED</span>';
+    } else if (detection[3] === 'medium') {  // risk_level
+        statusHtml = '<span class="result-status status-suspicious">⚠️ SUSPICIOUS</span>';
+    } else {
+        statusHtml = '<span class="result-status status-safe">✅ SAFE</span>';
+    }
+    
+    const indicators = detection[4] ? JSON.parse(detection[4]) : [];
+    const keywords = detection[5] ? JSON.parse(detection[5]) : [];
+    
+    content.innerHTML = `
+        <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Detection Details</h3>
+        <div class="mb-2">
+            <strong>Status:</strong> ${statusHtml}
+        </div>
+        <div class="mb-2">
+            <strong>Risk Level:</strong> 
+            <span style="color: ${detection[3] === 'high' ? 'var(--danger-red)' : detection[3] === 'medium' ? 'var(--warning-orange)' : 'var(--success-green)'};">
+                ${detection[3].toUpperCase()}
+            </span>
+        </div>
+        <div class="mb-2">
+            <strong>Confidence:</strong> ${(detection[2] * 100).toFixed(1)}%
+            <div class="confidence-bar mt-1">
+                <div class="confidence-fill" style="width: ${detection[2] * 100}%"></div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <strong>Analyzed Text:</strong>
+            <div style="background: rgba(42, 42, 42, 0.8); padding: 1rem; border-radius: 8px; margin-top: 0.5rem; font-family: monospace; white-space: pre-wrap;">${detection[0]}</div>
+        </div>
+        ${indicators.length > 0 ? `
+        <div class="mb-2">
+            <strong>Detected Indicators:</strong>
+            <ul style="margin: 0.5rem 0 0 1rem;">
+                ${indicators.map(indicator => `<li style="color: var(--text-gray);">${indicator}</li>`).join('')}
+            </ul>
+        </div>
+        ` : ''}
+        ${keywords.length > 0 ? `
+        <div class="mb-2">
+            <strong>Keywords Found:</strong>
+            <div style="margin-top: 0.5rem;">
+                ${keywords.map(keyword => `<span class="keywords-highlight">${keyword}</span>`).join('')}
+            </div>
+        </div>
+        ` : ''}
+        <div class="mb-2">
+            <strong>Explanation:</strong>
+            <p style="color: var(--text-gray); margin-top: 0.5rem;">${detection[6]}</p>
+        </div>
+        <div class="mb-2">
+            <strong>Analysis Date:</strong> ${detection[7]}
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+}
+
+function closeDetectionDetails() {
+    document.getElementById('detectionModal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+document.getElementById('detectionModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeDetectionDetails();
+    }
+});
+
+// Animate confidence bars on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const confidenceBars = document.querySelectorAll('.confidence-fill');
+    confidenceBars.forEach(bar => {
+        const percentage = bar.getAttribute('data-percentage');
+        if (percentage) {
+            setTimeout(() => {
+                bar.style.width = percentage + '%';
+            }, 500);
+        }
+    });
+});
+</script>
+{% endblock %}

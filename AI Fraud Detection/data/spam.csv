@@ -1,0 +1,41 @@
+channel,content,label,audio_file,video_file
+text,"This is the police, your number is under investigation, pay immediately to avoid arrest",scam,,
+text,"Meeting rescheduled to 4 PM tomorrow",legit,,
+text,"Urgent: Court case filed against you, settle fine today",scam,,
+text,"Happy Birthday! Hope you have a great day",legit,,
+text,"Your bank account has been frozen, click this link to unlock",scam,,
+text,"Reminder: Your electricity bill is due next week",legit,,
+text,"This is Income Tax Department, clear dues immediately or face legal action",scam,,
+text,"Your order has been shipped and will arrive soon",legit,,
+text,"Suspicious activity detected, provide your OTP now",scam,,
+text,"Let's catch up for lunch at 1 PM",legit,,
+text,"Lottery winner! Pay processing fee to claim prize",scam,,
+text,"Your OTP is 123456. Do not share with anyone.",legit,,
+text,"You are under digital arrest, failure to comply will result in jail time",scam,,
+text,"Salary credited to your bank account",legit,,
+text,"Your PAN card is blocked, verify details here",scam,,
+text,"Reminder: Doctor appointment at 5 PM",legit,,
+text,"Customs has seized your package, pay duty now",scam,,
+text,"Thanks for your payment. Subscription renewed successfully.",legit,,
+text,"This is Cyber Crime Division, confirm your identity via this call",scam,,
+text,"Join us for the online class at 10 AM tomorrow",legit,,
+audio,"This is the police, your number is under investigation, pay immediately to avoid arrest",scam,audio_sample_1.wav,
+audio,"Meeting rescheduled to 4 PM tomorrow",legit,audio_sample_2.wav,
+audio,"Urgent: Court case filed against you, settle fine today",scam,audio_sample_3.wav,
+audio,"Happy Birthday! Hope you have a great day",legit,audio_sample_4.wav,
+audio,"Your bank account has been frozen, click this link to unlock",scam,audio_sample_5.wav,
+audio,"Reminder: Your electricity bill is due next week",legit,audio_sample_6.wav,
+audio,"This is Income Tax Department, clear dues immediately or face legal action",scam,audio_sample_7.wav,
+audio,"Your order has been shipped and will arrive soon",legit,audio_sample_8.wav,
+audio,"Suspicious activity detected, provide your OTP now",scam,audio_sample_9.wav,
+audio,"Let's catch up for lunch at 1 PM",legit,audio_sample_10.wav,
+video,"This is the police, your number is under investigation, pay immediately to avoid arrest",scam,,video_sample_1.mp4
+video,"Meeting rescheduled to 4 PM tomorrow",legit,,video_sample_2.mp4
+video,"Urgent: Court case filed against you, settle fine today",scam,,video_sample_3.mp4
+video,"Happy Birthday! Hope you have a great day",legit,,video_sample_4.mp4
+video,"Your bank account has been frozen, click this link to unlock",scam,,video_sample_5.mp4
+video,"Reminder: Your electricity bill is due next week",legit,,video_sample_6.mp4
+video,"This is Income Tax Department, clear dues immediately or face legal action",scam,,video_sample_7.mp4
+video,"Your order has been shipped and will arrive soon",legit,,video_sample_8.mp4
+video,"Suspicious activity detected, provide your OTP now",scam,,video_sample_9.mp4
+video,"Let's catch up for lunch at 1 PM",legit,,video_sample_10.mp4

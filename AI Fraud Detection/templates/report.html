@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block title %}Report Scam - CyberGuard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="card mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 style="color: var(--accent-blue); margin-bottom: 0.5rem;">
+                    📝 Report Suspicious Activity
+                </h1>
+                <p style="color: var(--text-gray); margin: 0;">
+                    Help protect the community by reporting suspicious communications and improving our detection algorithms.
+                </p>
+            </div>
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-blue);">🛡️</div>
+                <small style="color: var(--text-gray);">Community Protection</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reporting Form -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">🚨 Submit Suspicious Content</h3>
+        </div>
+        <form method="POST" class="mt-3">
+            <div class="form-group">
+                <label for="message_type" class="form-label">
+                    <span style="color: var(--accent-blue);">📱</span> Communication Type
+                </label>
+                <select id="message_type" name="message_type" class="form-control" required>
+                    <option value="">Select communication type...</option>
+                    <option value="email">📧 Email</option>
+                    <option value="sms">📱 SMS/Text Message</option>
+                    <option value="phone">📞 Phone Call</option>
+                    <option value="social_media">📱 Social Media Message</option>
+                    <option value="website">🌐 Website/Web Form</option>
+                    <option value="app_message">📱 App Message</option>
+                    <option value="other">❓ Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="content" class="form-label">
+                    <span style="color: var(--accent-blue);">📄</span> Suspicious Content
+                </label>
+                <textarea 
+                    id="content" 
+                    name="content" 
+                    class="form-control" 
+                    placeholder="Paste the suspicious message content here. Include sender information, links, and any other relevant details..."
+                    rows="8"
+                    required
+                ></textarea>
+                <small style="color: var(--text-gray); margin-top: 0.5rem; display: block;">
+                    💡 Include as much detail as possible: sender address, phone number, website URL, etc.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="source" class="form-label">
+                    <span style="color: var(--accent-blue);">🔍</span> Source Information
+                </label>
+                <input 
+                    type="text" 
+                    id="source" 
+                    name="source" 
+                    class="form-control" 
+                    placeholder="Sender email, phone number, website URL, or social media handle..."
+                >
+                <small style="color: var(--text-gray); margin-top: 0.5rem; display: block;">
+                    📧 Email addresses, phone numbers, or website URLs help us track patterns.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label">
+                    <span style="color: var(--accent-blue);">📝</span> Additional Details
+                </label>
+                <textarea 
+                    id="description" 
+                    name="description" 
+                    class="form-control" 
+                    placeholder="Describe what made this communication suspicious. Any additional context or details..."
+                    rows="4"
+                ></textarea>
+                <small style="color: var(--text-gray); margin-top: 0.5rem; display: block;">
+                    💭 What red flags did you notice? Any threats, requests for money, or personal information?
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="severity" class="form-label">
+                    <span style="color: var(--accent-blue);">⚠️</span> Threat Severity
+                </label>
+                <select id="severity" name="severity" class="form-control" required>
+                    <option value="low">🟢 Low - Suspicious but not urgent</option>
+                    <option value="medium" selected>🟡 Medium - Potentially harmful</option>
+                    <option value="high">🔴 High - Clear scam or threat</option>
+                    <option value="critical">🚨 Critical - Active threat or financial loss</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary w-100">
+                    📝 Submit Report
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Report Guidelines -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">📋 Reporting Guidelines</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border-left: 4px solid var(--accent-blue);">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">✅ What to Report</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Phishing emails or messages</li>
+                    <li>Fake lottery or prize notifications</li>
+                    <li>Romance scams</li>
+                    <li>Tech support scams</li>
+                    <li>Investment fraud</li>
+                    <li>Identity theft attempts</li>
+                </ul>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 4px solid var(--success-green);">
+                <h6 style="color: var(--success-green); margin-bottom: 0.5rem;">🔒 Privacy Protection</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Your personal information is protected</li>
+                    <li>Reports are anonymized</li>
+                    <li>Data is encrypted and secure</li>
+                    <li>We never share your identity</li>
+                    <li>Reports help improve detection</li>
+                </ul>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border-left: 4px solid var(--warning-orange);">
+                <h6 style="color: var(--warning-orange); margin-bottom: 0.5rem;">⚠️ Important Notes</h6>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                    <li>Do not include your passwords</li>
+                    <li>Remove personal financial info</li>
+                    <li>Don't forward malicious attachments</li>
+                    <li>Report immediately after receiving</li>
+                    <li>Keep original message if possible</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Common Scam Types -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🎯 Common Scam Types</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">💰 Financial Scams</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Fake investment opportunities, lottery winnings, or requests for money transfers.
+                </p>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🔐 Identity Theft</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Requests for personal information, SSN, bank details, or account credentials.
+                </p>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🛠️ Tech Support</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Fake tech support calls claiming your computer is infected or needs repair.
+                </p>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">💕 Romance Scams</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Fake romantic relationships designed to extract money or personal information.
+                </p>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🏛️ Authority Impersonation</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Fake calls from IRS, police, courts, or other government agencies.
+                </p>
+            </div>
+            
+            <div style="background: rgba(42, 42, 42, 0.8); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">🎁 Prize Scams</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Fake notifications about winning prizes, contests, or sweepstakes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact of Reporting -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🌟 Your Impact</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--success-green); margin-bottom: 1rem;">🛡️</div>
+                <h5 style="color: var(--accent-blue);">Protect Others</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Help prevent others from falling victim to the same scams
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 1rem;">🤖</div>
+                <h5 style="color: var(--accent-blue);">Improve AI</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Your reports help train our detection algorithms
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--warning-orange); margin-bottom: 1rem;">📊</div>
+                <h5 style="color: var(--accent-blue);">Track Trends</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Identify emerging threats and attack patterns
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <div style="font-size: 3rem; color: var(--accent-purple); margin-bottom: 1rem;">🔍</div>
+                <h5 style="color: var(--accent-blue);">Investigate</h5>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Help authorities track down scammers
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">🚨 Emergency Resources</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger-red); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--danger-red); margin-bottom: 0.5rem;">💰 Financial Loss</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Contact your bank immediately and report to the FBI's Internet Crime Complaint Center (IC3).
+                </p>
+            </div>
+            
+            <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid var(--warning-orange); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--warning-orange); margin-bottom: 0.5rem;">🔐 Identity Theft</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Report to IdentityTheft.gov and place fraud alerts on your credit reports.
+                </p>
+            </div>
+            
+            <div style="background: rgba(0, 212, 255, 0.1); border: 1px solid var(--accent-blue); border-radius: 8px; padding: 1rem;">
+                <h6 style="color: var(--accent-blue); margin-bottom: 0.5rem;">📧 Email Scams</h6>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">
+                    Forward phishing emails to your email provider and report to the Anti-Phishing Working Group.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const contentTextarea = document.getElementById('content');
+    const sourceInput = document.getElementById('source');
+    const descriptionTextarea = document.getElementById('description');
+    
+    // Add character counter to content textarea
+    if (contentTextarea) {
+        const counter = document.createElement('div');
+        counter.style.color = 'var(--text-gray)';
+        counter.style.fontSize = '0.9rem';
+        counter.style.marginTop = '0.5rem';
+        contentTextarea.parentNode.appendChild(counter);
+        
+        function updateCounter() {
+            const length = contentTextarea.value.length;
+            counter.textContent = `${length} characters`;
+            if (length > 2000) {
+                counter.style.color = 'var(--warning-orange)';
+            } else if (length > 1000) {
+                counter.style.color = 'var(--accent-blue)';
+            } else {
+                counter.style.color = 'var(--text-gray)';
+            }
+        }
+        
+        contentTextarea.addEventListener('input', updateCounter);
+        updateCounter();
+    }
+
+    // Auto-resize textareas
+    [contentTextarea, descriptionTextarea].forEach(textarea => {
+        if (textarea) {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        }
+    });
+
+    // Form validation
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const content = contentTextarea.value.trim();
+            const messageType = document.getElementById('message_type').value;
+            const severity = document.getElementById('severity').value;
+            
+            if (content.length < 20) {
+                e.preventDefault();
+                alert('Please provide at least 20 characters of suspicious content for analysis.');
+                contentTextarea.focus();
+                return;
+            }
+            
+            if (!messageType) {
+                e.preventDefault();
+                alert('Please select a communication type.');
+                return;
+            }
+            
+            if (!severity) {
+                e.preventDefault();
+                alert('Please select a threat severity level.');
+                return;
+            }
+            
+            // Add loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<span class="spinner"></span> Submitting Report...';
+            submitBtn.disabled = true;
+        });
+    }
+
+    // Auto-detect message type based on content
+    if (contentTextarea) {
+        contentTextarea.addEventListener('input', function() {
+            const content = this.value.toLowerCase();
+            const messageTypeSelect = document.getElementById('message_type');
+            
+            if (content.includes('@') && content.includes('.com')) {
+                messageTypeSelect.value = 'email';
+            } else if (content.includes('http') || content.includes('www.')) {
+                messageTypeSelect.value = 'website';
+            } else if (content.match(/\d{3}[-.]?\d{3}[-.]?\d{4}/)) {
+                messageTypeSelect.value = 'phone';
+            }
+        });
+    }
+
+    // Auto-detect severity based on keywords
+    if (contentTextarea) {
+        contentTextarea.addEventListener('input', function() {
+            const content = this.value.toLowerCase();
+            const severitySelect = document.getElementById('severity');
+            
+            const criticalKeywords = ['arrest', 'warrant', 'legal action', 'police', 'court', 'jail'];
+            const highKeywords = ['urgent', 'immediately', 'act now', 'limited time', 'expires'];
+            const mediumKeywords = ['free', 'guaranteed', 'investment', 'opportunity'];
+            
+            if (criticalKeywords.some(keyword => content.includes(keyword))) {
+                severitySelect.value = 'critical';
+            } else if (highKeywords.some(keyword => content.includes(keyword))) {
+                severitySelect.value = 'high';
+            } else if (mediumKeywords.some(keyword => content.includes(keyword))) {
+                severitySelect.value = 'medium';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
